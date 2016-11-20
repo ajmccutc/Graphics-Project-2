@@ -2,8 +2,20 @@ function global(){
     "use strict"
 var canvas;
 var gl;
+    
+    
+    var colors = [
+    vec4( 0.0, 0.0, 0.0, 1.0 ),  // black
+    vec4( 1.0, 0.0, 0.0, 1.0 ),  // red
+    vec4( 1.0, 1.0, 0.0, 1.0 ),  // yellow
+    vec4( 0.0, 1.0, 0.0, 1.0 ),  // green
+    vec4( 0.0, 0.0, 1.0, 1.0 ),  // blue
+    vec4( 1.0, 0.0, 1.0, 1.0 ),  // magenta
+    vec4( 0.0, 1.0, 1.0, 1.0 )   // cyan
+];
 
-var numTimesToSubdivide = 5;
+
+var numTimesToSubdivide = 3;
 
 var index = 0;
 
@@ -96,12 +108,19 @@ function tetrahedron(a, b, c, d, n) {
     divideTriangle(a, d, b, n);
     divideTriangle(a, c, d, n);
 }
-
+var leftcanvas;
+var topcanvas;
 window.onload = function init() {
 
     canvas = document.getElementById("gl-canvas");
 
-    gl = WebGLUtils.setupWebGL(canvas);
+    //assign canvas offset values
+    leftcanvas = offset(canvas).left;
+    topcanvas = offset(canvas).top;
+    
+    
+    
+    gl = WebGLUtils.setupWebGL(canvas,{preserveDrawingBuffer: true});
     if (!gl) { alert("WebGL isn't available"); }
 
     gl.viewport(0, 0, canvas.width, canvas.height);
@@ -150,7 +169,7 @@ window.onload = function init() {
     document.getElementById("Button4").onclick = function () { phi += dr; };
     document.getElementById("Button5").onclick = function () { phi -= dr; };
 
-/*
+
     document.getElementById("Button6").onclick = function () {
         numTimesToSubdivide++;
         index = 0;
@@ -165,7 +184,6 @@ window.onload = function init() {
         normalsArray = [];
         init();
     };
-*/
 
 
     gl.uniform4fv(gl.getUniformLocation(program,
@@ -179,9 +197,50 @@ window.onload = function init() {
     gl.uniform1f(gl.getUniformLocation(program,
        "shininess"), materialShininess);
 
+    
+    canvas.addEventListener("click",clickviacolour,false);
+    
+    
     render();
 }
 
+
+
+
+//moving the mouse around
+//selecting any of the colours
+function clickviacolour(){
+    //console.log(canvas.width/2);
+    //console.log(canvas.height/2);
+    var pixelData = new Float32Array(3);
+    console.log(event.clientX);
+    console.log(event.clientY)
+    var pixels = new Uint8Array(4);
+    gl.readPixels(event.clientX-leftcanvas, event.clientY-topcanvas, 1, 1, gl.RGBA, gl.UNSIGNED_BYTE, pixels);
+    //gl.readPixels(event.clientX, event.clientY, 1, 1, gl.RGB, gl.FLOAT, pixelData);
+    console.log(pixels);
+    var t = vec2(2*event.clientX/canvas.width-1, 
+           2*(canvas.height-event.clientY)/canvas.height-1);
+    for (var i = 0; i<10 ;i++){
+        //if the colours match to the 10 colours then destory them
+        if (colors[i] == pixelData){
+            console.log("CLICK");
+        }
+    }
+    
+}
+function offset(elem) {
+    
+    var x = elem.offsetLeft;
+    var y = elem.offsetTop;
+
+    while (elem = elem.offsetParent) {
+        x += elem.offsetLeft;
+        y += elem.offsetTop;
+    }
+
+    return { left: x, top: y };
+}
 
 function render() {
 
