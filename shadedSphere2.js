@@ -1,7 +1,7 @@
 var canvas;
 var gl;
 
-var numTimesToSubdivide = 3;
+var numTimesToSubdivide = 5;
 
 var index = 0;
 
@@ -148,6 +148,7 @@ window.onload = function init() {
     document.getElementById("Button4").onclick = function () { phi += dr; };
     document.getElementById("Button5").onclick = function () { phi -= dr; };
 
+/*
     document.getElementById("Button6").onclick = function () {
         numTimesToSubdivide++;
         index = 0;
@@ -162,6 +163,7 @@ window.onload = function init() {
         normalsArray = [];
         init();
     };
+*/
 
 
     gl.uniform4fv(gl.getUniformLocation(program,
