@@ -2,8 +2,8 @@
 
 var canvas;
 var gl;
-
-var numTimesToSubdivide = 3;
+//This magic number of 5 subdivisions seems to be smooth so I will leave there and remove the increase and decrease subdivision buttons
+var numTimesToSubdivide = 5;
  
 var index = 0;
 
@@ -150,7 +150,7 @@ window.onload = function init() {
     document.getElementById("Button4").onclick = function(){phi += dr;};
     document.getElementById("Button5").onclick = function(){phi -= dr;};
     
-    document.getElementById("Button6").onclick = function(){
+/*    document.getElementById("Button6").onclick = function(){
         numTimesToSubdivide++; 
         index = 0;
         pointsArray = []; 
@@ -163,7 +163,7 @@ window.onload = function init() {
         pointsArray = []; 
         normalsArray = [];
         init();
-    };
+    };*/
 
 
     gl.uniform4fv( gl.getUniformLocation(program, 
