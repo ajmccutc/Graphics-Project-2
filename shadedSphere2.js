@@ -1,4 +1,3 @@
-d
 
 var canvas;
 var gl;
@@ -52,9 +51,9 @@ n1=vec4(a)
 n2=vec4(b)
 n3=vec4(c)
 n1[3]=0.0; n2[3]=0.0; n3[3]=0.0;
-     //normalsArray.push(a);
-     //normalsArray.push(b);
-    // normalsArray.push(c);
+    normalsArray.push(a);
+    normalsArray.push(b);
+    normalsArray.push(c);
 
 normalsArray.push(n1);
      normalsArray.push(n2);
@@ -149,7 +148,8 @@ window.onload = function init() {
     document.getElementById("Button3").onclick = function(){theta -= dr;};
     document.getElementById("Button4").onclick = function(){phi += dr;};
     document.getElementById("Button5").onclick = function(){phi -= dr;};
-    /*
+
+/*
     document.getElementById("Button6").onclick = function(){
         numTimesToSubdivide++; 
         index = 0;
@@ -166,6 +166,7 @@ window.onload = function init() {
     };
 
 */
+
     gl.uniform4fv( gl.getUniformLocation(program, 
        "ambientProduct"),flatten(ambientProduct) );
     gl.uniform4fv( gl.getUniformLocation(program, 
