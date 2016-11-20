@@ -1,5 +1,5 @@
 function global(){
-    "use strick"
+    "use strict"
 var canvas;
 var gl;
 
@@ -48,9 +48,9 @@ var at = vec3(0.0, 0.0, 0.0);
 var up = vec3(0.0, 1.0, 0.0);
 
 function triangle(a, b, c) {
-    n1 = vec4(a)
-    n2 = vec4(b)
-    n3 = vec4(c)
+    var n1 = vec4(a)
+    var n2 = vec4(b)
+    var n3 = vec4(c)
     n1[3] = 0.0; n2[3] = 0.0; n3[3] = 0.0;
     //normalsArray.push(a);
     //normalsArray.push(b);
@@ -116,9 +116,9 @@ window.onload = function init() {
     gl.useProgram(program);
 
 
-    ambientProduct = mult(lightAmbient, materialAmbient);
-    diffuseProduct = mult(lightDiffuse, materialDiffuse);
-    specularProduct = mult(lightSpecular, materialSpecular);
+    var ambientProduct = mult(lightAmbient, materialAmbient);
+    var diffuseProduct = mult(lightDiffuse, materialDiffuse);
+    var specularProduct = mult(lightSpecular, materialSpecular);
 
 
     tetrahedron(va, vb, vc, vd, numTimesToSubdivide);
