@@ -1,3 +1,5 @@
+function global(){
+    "use strick"
 var canvas;
 var gl;
 
@@ -199,3 +201,5 @@ function render() {
 
     window.requestAnimFrame(render);
 }
+}
+global();
