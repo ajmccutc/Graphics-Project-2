@@ -209,7 +209,7 @@ window.onload = function init() {
 
 //moving the mouse around
 //selecting any of the colours
-function clickviacolour(){
+function clickviacolour(event){
     //console.log(canvas.width/2);
     //console.log(canvas.height/2);
     var pixelData = new Float32Array(3);
