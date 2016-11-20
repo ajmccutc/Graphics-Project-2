@@ -1,4 +1,4 @@
-
+window.addEventListener("load",function(){
 var canvas;
 var gl;
 
@@ -96,7 +96,7 @@ function tetrahedron(a, b, c, d, n) {
     divideTriangle(a, c, d, n);
 }
 
-window.onload = function init() {
+function init() {
 
     canvas = document.getElementById( "gl-canvas" );
     
@@ -200,3 +200,5 @@ function render() {
 
     window.requestAnimFrame(render);
 }
+    init();
+});
