@@ -1,5 +1,6 @@
 function global(){
     "use strict"
+
 var canvas;
 var gl;
 
@@ -33,7 +34,7 @@ var lightAmbient = vec4(0.2, 0.2, 0.2, 1.0);
 var lightDiffuse = vec4(1.0, 1.0, 1.0, 1.0);
 var lightSpecular = vec4(1.0, 1.0, 1.0, 1.0);
 
-var materialAmbient = vec4(1.0, 0.0, 1.0, 1.0);
+var materialAmbient = vec4(Math.random(), 0.0, 1.0, 1.0);
 var materialDiffuse = vec4(1.0, 0.8, 0.0, 1.0);
 var materialSpecular = vec4(1.0, 0.8, 0.0, 1.0);
 var materialShininess = 100.0;
@@ -97,6 +98,8 @@ function tetrahedron(a, b, c, d, n) {
     divideTriangle(a, c, d, n);
 }
 
+    
+    
 window.onload = function init() {
 
     canvas = document.getElementById("gl-canvas");
@@ -122,7 +125,28 @@ window.onload = function init() {
 
 
     tetrahedron(va, vb, vc, vd, numTimesToSubdivide);
+//cirlces
+//    var cx;
+//    var cy;
+//    var cz=1;
+//    var cr;
+//    var circle[][];
+//    
+//for (var i=0;i== traingles.length();i++){
+    
+//}
 
+    //end
+   // cathead();
+    var min=-1.0;
+    var max=1.0;
+    for (var i=0;i<10;i++){
+    var a=(Math.random() * (max - min) + min);
+    var b=(Math.random() * (max - min) + min);
+    var c=(Math.random() * (max - min) + min);
+    var theta = 2*Math.PI/spokes;
+    circlehead(vec4(a,b,c,1.0),_radius,spokes);
+    }
     var nBuffer = gl.createBuffer();
     gl.bindBuffer(gl.ARRAY_BUFFER, nBuffer);
     gl.bufferData(gl.ARRAY_BUFFER, flatten(normalsArray), gl.STATIC_DRAW);
@@ -201,5 +225,44 @@ function render() {
 
     window.requestAnimFrame(render);
 }
+   
+    
+   /* function cathead(){
+      triangle(vec4(1.0,0.0,0.0,1.0),
+               vec4(0.0,0.0,0.0,1.0),
+               vec4(1.0,1.0,0.0,1.0));  
+
+        triangle(vec4(-1.0,0.0,0.0,1.0),
+                vec4(0.0,0.0,0.0,1.0),
+                vec4(-1.0,1.0,0.0,1.0));
+            triangle(vec4(-1.0,-1.0,0.0,1.0),
+                vec4(0.0,0.0,0.0,1.0),
+                vec4(1.0,-1.0,0.0,1.0));
+        }
+*/
+
+
+    //var point=vec4(1,1, 0, 1.0);
+    var _radius=.15;
+    var spokes =12;
+    var t;
+    var t2;
+    
+    function circlehead(point,_radius,spokes){
+        for (var i=0;i<(spokes);i++){
+            t=i*(2*Math.PI)/spokes;
+            t2=(i+1)*(2*Math.PI)/spokes;
+       //     triangle(vec4((1*Math.cos(i*(Math.PI/spokes))),0+Math.sin(2*(Math.PI/spokes)),0.0,1.0),
+          //     vec4(0.0,0.0,0.0,1.0),
+           //    vec4(1.0,1.0,0.0,1.0));  
+            var x = vec4(point[0]+_radius*Math.cos(t),point[1]+_radius*Math.sin(t),point[2],1.0);
+            var y = vec4(point[0]+_radius*Math.cos(t2),point[1]+_radius*Math.sin(t2),point[2],1.0);
+            //var y = vec4(point[0]+(_radius)*(Math.cos(t)),point[1]+(_radius+1)*Math.sin(t),point[2],1.0);
+            var z = point;
+        triangle(x,y,z);
+        }
+      
+        }
 }
+
 global();
