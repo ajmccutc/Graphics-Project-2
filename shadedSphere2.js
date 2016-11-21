@@ -3,11 +3,7 @@ var canvas;
 var gl;
 var leftcanvas;
 var topcanvas;
-    
-function global(){
-    "use strict"
-
-    var colors = [
+var colors = [
     vec4( 0.0, 0.0, 0.0, 1.0 ),  // black
     vec4( 1.0, 0.0, 0.0, 1.0 ),  // red
     vec4( 1.0, 1.0, 0.0, 1.0 ),  // yellow
@@ -16,6 +12,11 @@ function global(){
     vec4( 1.0, 0.0, 1.0, 1.0 ),  // magenta
     vec4( 0.0, 1.0, 1.0, 1.0 )   // cyan
 ];
+    
+function global(){
+    "use strict"
+
+    
 
 
 var numTimesToSubdivide = 3;
