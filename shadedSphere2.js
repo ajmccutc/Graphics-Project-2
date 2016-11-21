@@ -1,10 +1,24 @@
-function global(){
-    "use strict"
 
 var canvas;
 var gl;
+var leftcanvas;
+var topcanvas;
+    
+function global(){
+    "use strict"
 
-var numTimesToSubdivide = 5;
+    var colors = [
+    vec4( 0.0, 0.0, 0.0, 1.0 ),  // black
+    vec4( 1.0, 0.0, 0.0, 1.0 ),  // red
+    vec4( 1.0, 1.0, 0.0, 1.0 ),  // yellow
+    vec4( 0.0, 1.0, 0.0, 1.0 ),  // green
+    vec4( 0.0, 0.0, 1.0, 1.0 ),  // blue
+    vec4( 1.0, 0.0, 1.0, 1.0 ),  // magenta
+    vec4( 0.0, 1.0, 1.0, 1.0 )   // cyan
+];
+
+
+var numTimesToSubdivide = 3;
 
 var index = 0;
 
@@ -104,7 +118,13 @@ window.onload = function init() {
 
     canvas = document.getElementById("gl-canvas");
 
-    gl = WebGLUtils.setupWebGL(canvas);
+    //assign canvas offset values
+    leftcanvas = offset(canvas).left;
+    topcanvas = offset(canvas).top;
+    
+    
+    
+    gl = WebGLUtils.setupWebGL(canvas,{preserveDrawingBuffer: true});
     if (!gl) { alert("WebGL isn't available"); }
 
     gl.viewport(0, 0, canvas.width, canvas.height);
@@ -174,7 +194,7 @@ window.onload = function init() {
     document.getElementById("Button4").onclick = function () { phi += dr; };
     document.getElementById("Button5").onclick = function () { phi -= dr; };
 
-/*
+
     document.getElementById("Button6").onclick = function () {
         numTimesToSubdivide++;
         index = 0;
@@ -189,7 +209,6 @@ window.onload = function init() {
         normalsArray = [];
         init();
     };
-*/
 
 
     gl.uniform4fv(gl.getUniformLocation(program,
@@ -203,8 +222,16 @@ window.onload = function init() {
     gl.uniform1f(gl.getUniformLocation(program,
        "shininess"), materialShininess);
 
+    
+    canvas.addEventListener("click",clickviacolour,false);
+    
+    
     render();
 }
+
+
+
+
 
 
 function render() {
