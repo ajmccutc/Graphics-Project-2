@@ -1,9 +1,11 @@
-function global(){
-    "use strict"
 var canvas;
 var gl;
+var leftcanvas;
+var topcanvas;
     
-    
+function global(){
+    "use strict"
+
     var colors = [
     vec4( 0.0, 0.0, 0.0, 1.0 ),  // black
     vec4( 1.0, 0.0, 0.0, 1.0 ),  // red
@@ -108,8 +110,7 @@ function tetrahedron(a, b, c, d, n) {
     divideTriangle(a, d, b, n);
     divideTriangle(a, c, d, n);
 }
-var leftcanvas;
-var topcanvas;
+
 window.onload = function init() {
 
     canvas = document.getElementById("gl-canvas");
@@ -207,40 +208,7 @@ window.onload = function init() {
 
 
 
-//moving the mouse around
-//selecting any of the colours
-function clickviacolour(event){
-    //console.log(canvas.width/2);
-    //console.log(canvas.height/2);
-    var pixelData = new Float32Array(3);
-    console.log(event.clientX);
-    console.log(event.clientY)
-    var pixels = new Uint8Array(4);
-    gl.readPixels(event.clientX-leftcanvas, event.clientY-topcanvas, 1, 1, gl.RGBA, gl.UNSIGNED_BYTE, pixels);
-    //gl.readPixels(event.clientX, event.clientY, 1, 1, gl.RGB, gl.FLOAT, pixelData);
-    console.log(pixels);
-    var t = vec2(2*event.clientX/canvas.width-1, 
-           2*(canvas.height-event.clientY)/canvas.height-1);
-    for (var i = 0; i<10 ;i++){
-        //if the colours match to the 10 colours then destory them
-        if (colors[i] == pixelData){
-            console.log("CLICK");
-        }
-    }
-    
-}
-function offset(elem) {
-    
-    var x = elem.offsetLeft;
-    var y = elem.offsetTop;
 
-    while (elem = elem.offsetParent) {
-        x += elem.offsetLeft;
-        y += elem.offsetTop;
-    }
-
-    return { left: x, top: y };
-}
 
 function render() {
 
