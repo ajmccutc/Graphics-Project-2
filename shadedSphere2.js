@@ -11,12 +11,14 @@ var colors = [
     vec4(1.0, 0.0, 1.0, 1.0), // magenta
     vec4(0.0, 1.0, 1.0, 1.0) // cyan
 ];
+var bacteria = [];
+
 var modelViewMatrixLoc, projectionMatrixLoc;
 
 function global() {
     "use strict"
     var planet;
-    var bacteria = [];
+    
     var program;
     var numTimesToSubdivide = 3;
     var index = 0;
@@ -153,6 +155,7 @@ function global() {
             init();
         };
         canvas.addEventListener("click", clickviacolour, false);
+        canvas.addEventListener("contextmenu",rotatearound,false);
         render();
     }
 
