@@ -154,9 +154,13 @@ function global() {
             pointsArray = [];
             normalsArray = [];
             init();
+            console.log(modelViewMatrix);
         };
         canvas.addEventListener("click", clickviacolour, false);
-        canvas.addEventListener("contextmenu",rotatearound,false);
+        canvas.addEventListener("mousewheelup",rotatearoundy,false);
+        document.getElementsByTagName("body")[0].addEventListener("keypress",rotatearound,false);
+        canvas.addEventListener("mousewheeldown",rotatearoundydown,false);
+
         
         eye = vec3(radius * Math.sin(theta) * Math.cos(phi), radius * Math.sin(theta) * Math.sin(phi), radius * Math.cos(theta));
         modelViewMatrix = lookAt(eye, at, up);
