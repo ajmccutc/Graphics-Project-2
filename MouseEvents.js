@@ -27,6 +27,10 @@ function offset(elem) {
     return { left: x, top: y };
 }
 function rotatearound (event){
-    //rotate camera
+    event.preventDefault();
     
+    
+    //rotate camera
+    modelViewMatrix = mult(modelViewMatrix,rotate(15,[1,0,0]));
+    console.log("Helo WOrld");
 }

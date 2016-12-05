@@ -12,6 +12,7 @@ var colors = [
     vec4(0.0, 1.0, 1.0, 1.0) // cyan
 ];
 var bacteria = [];
+var modelViewMatrix, projectionMatrix;
 
 var modelViewMatrixLoc, projectionMatrixLoc;
 
@@ -40,7 +41,7 @@ function global() {
     var vd = vec4(0.816497, -0.471405, 0.333333, 1);
     var ctm;
     var ambientColor, diffuseColor, specularColor;
-    var modelViewMatrix, projectionMatrix;
+    
     var eye;
     var at = vec3(0.0, 0.0, 0.0);
     var up = vec3(0.0, 1.0, 0.0);
@@ -156,6 +157,10 @@ function global() {
         };
         canvas.addEventListener("click", clickviacolour, false);
         canvas.addEventListener("contextmenu",rotatearound,false);
+        
+        eye = vec3(radius * Math.sin(theta) * Math.cos(phi), radius * Math.sin(theta) * Math.sin(phi), radius * Math.cos(theta));
+        modelViewMatrix = lookAt(eye, at, up);
+        
         render();
     }
 
@@ -171,8 +176,8 @@ function global() {
 
     function render() {
         gl.clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT);
-        eye = vec3(radius * Math.sin(theta) * Math.cos(phi), radius * Math.sin(theta) * Math.sin(phi), radius * Math.cos(theta));
-        modelViewMatrix = lookAt(eye, at, up);
+        
+        
         projectionMatrix = ortho(left, right, bottom, ytop, near, far);
         planet.draw(modelViewMatrix, projectionMatrix, program);
         for (var i = 0; i < bacteria.length; i++) {
