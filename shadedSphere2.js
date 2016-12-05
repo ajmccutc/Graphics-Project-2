@@ -123,6 +123,7 @@ function global() {
         gl.enableVertexAttribArray(vPosition);
         modelViewMatrixLoc = gl.getUniformLocation(program, "modelViewMatrix");
         projectionMatrixLoc = gl.getUniformLocation(program, "projectionMatrix");
+       /*
         document.getElementById("Button0").onclick = function () {
             radius *= 2.0;
         };
@@ -155,7 +156,7 @@ function global() {
             normalsArray = [];
             init();
             console.log(modelViewMatrix);
-        };
+        };*/
         canvas.addEventListener("click", clickviacolour, false);
         canvas.addEventListener("mousewheelup",rotatearoundy,false);
         document.getElementsByTagName("body")[0].addEventListener("keypress",rotatearound,false);
